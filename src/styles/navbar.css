@@ -1,0 +1,21 @@
+img {
+    width: 100px;
+    padding-left: 10px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+.navbar > ul > li {
+    list-style-type: none;
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+ul {
+    display: flex;
+}
