@@ -1,11 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "./Card";
 import data from "../restaurantList.json";
+import "../styles/body.css";
+
+const filterData = (searchText, filterRestaurantList) => {
+
+  let fildata = filterRestaurantList.filter((restaurant) =>
+    restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  console.log("this is filter data ", fildata);
+  return fildata;
+};
 
 const Body = () => {
+  const [searchText, setSearchText] = useState("");
+
+  const [restaurantList, setRestaurantList] = useState(data);
+  const [filterRestaurantList, setFilterRestaurantList] = useState(data);
+
+  // console.log(restaurantList)
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
-      <Card
+    <>
+      <div>
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="Search the restaurant..."
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+        />
+
+        <button
+          onClick={() => {
+            setRestaurantList(filterData(searchText, filterRestaurantList));
+          }}
+        >
+          Search
+        </button>
+      </div>
+
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {restaurantList.map((list) => {
+          return (
+            <Card
+              {...list.info}
+              // image={list.info.cloudinaryImageId}
+              // name={list.info.name}
+              // avgRating={list.info.avgRating}
+              // areaName={list.info.areaName}
+              key={list.info.id}
+            />
+          );
+        })}
+
+        {/* <Card
         image={data[0].info.cloudinaryImageId}
         name={data[0].info.name}
         avgRating={data[0].info.avgRating}
@@ -51,13 +101,14 @@ const Body = () => {
         areaName={data[0].info.areaName}
       />
 
-<Card
+      <Card
         image={data[4].info.cloudinaryImageId}
         name={data[4].info.name}
         avgRating={data[4].info.avgRating}
         areaName={data[4].info.areaName}
-      />
-    </div>
+      /> */}
+      </div>
+    </>
   );
 };
 
