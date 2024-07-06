@@ -19,3 +19,7 @@ img {
 ul {
     display: flex;
 }
+
+button{
+    padding: 10px;
+}

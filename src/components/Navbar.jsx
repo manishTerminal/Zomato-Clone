@@ -1,7 +1,10 @@
+import { useState } from "react";
 import zetomart from "../assets/zetomart-logo.png";
 import "../styles/navbar.css";
 
 const Navbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <div className="navbar">
       <div>
@@ -15,6 +18,23 @@ const Navbar = () => {
         <li>Help</li>
         <li>Cart</li>
       </ul>
+      {(isLoggedIn) ? (
+        <button
+          onClick={() => {
+            setIsLoggedIn(false);
+          }}
+        >
+          LogIn
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            setIsLoggedIn(true);
+          }}
+        >
+          LogOut
+        </button>
+      )}
     </div>
   );
 };

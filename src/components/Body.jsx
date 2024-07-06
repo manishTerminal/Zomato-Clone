@@ -1,26 +1,46 @@
-import React, { useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Card from "./Card";
-import data from "../restaurantList.json";
+// import data from "../restaurantList.json";
 import "../styles/body.css";
-
-const filterData = (searchText, filterRestaurantList) => {
-
-  let fildata = filterRestaurantList.filter((restaurant) =>
-    restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
-  );
-
-  console.log("this is filter data ", fildata);
-  return fildata;
-};
+import { API_URL } from "../constant";
+import ShimmerUi from "./ShimmerUi";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
+  const [restaurantList, setRestaurantList] = useState([]);
+  const [filterRestaurantList, setFilterRestaurantList] = useState([]);
 
-  const [restaurantList, setRestaurantList] = useState(data);
-  const [filterRestaurantList, setFilterRestaurantList] = useState(data);
+  console.log(restaurantList)
+  useEffect(() => {
+    fetchRestaurant();
+  }, []);
 
-  // console.log(restaurantList)
-  return (
+  const fetchRestaurant = async () => {
+    const data = await fetch(API_URL);
+    const res = await data.json();
+    console.log(res);
+
+    setRestaurantList(
+      res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilterRestaurantList(
+      res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+  };
+
+  const filterData = (searchText, filterRestaurantList) => {
+    let fildata = filterRestaurantList.filter((restaurant) =>
+      restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    if (fildata.length === 0) {
+      return filterRestaurantList;
+    } else {
+      return fildata;
+    }
+  };
+
+  return (restaurantList.length === 0) ? <ShimmerUi/> : (
     <>
       <div>
         <input
@@ -42,17 +62,8 @@ const Body = () => {
       </div>
 
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {restaurantList.map((list) => {
-          return (
-            <Card
-              {...list.info}
-              // image={list.info.cloudinaryImageId}
-              // name={list.info.name}
-              // avgRating={list.info.avgRating}
-              // areaName={list.info.areaName}
-              key={list.info.id}
-            />
-          );
+        {filterRestaurantList.map((list) => {
+          return <Card {...list.info} key={list.info.id} />;
         })}
 
         {/* <Card
