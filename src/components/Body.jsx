@@ -62,7 +62,7 @@ const Body = () => {
       </div>
 
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {filterRestaurantList.map((list) => {
+        {restaurantList.map((list) => {
           return <Card {...list.info} key={list.info.id} />;
         })}
 
