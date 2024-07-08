@@ -1,6 +1,7 @@
 import { useState } from "react";
 import zetomart from "../assets/zetomart-logo.png";
 import "../styles/navbar.css";
+import {Link} from "react-router-dom"
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -8,23 +9,33 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div>
-        <a href="/">
+        <Link to="/">
           <img src={zetomart} alt="logo" />
-        </a>
+        </Link>
       </div>
+      <div className="auth">
       <ul className="nav-items">
-        <li>Search</li>
+        <Link to="/profile">
+        <li>Profile</li>
+        </Link>
+        <Link to="/offer">
         <li>Offer</li>
+        </Link>
+        <Link to="/help">
         <li>Help</li>
+        </Link>
+        <Link to="/cart">
         <li>Cart</li>
+        </Link>
       </ul>
+      
       {(isLoggedIn) ? (
         <button
           onClick={() => {
             setIsLoggedIn(false);
           }}
         >
-          LogIn
+          Log In
         </button>
       ) : (
         <button
@@ -32,9 +43,10 @@ const Navbar = () => {
             setIsLoggedIn(true);
           }}
         >
-          LogOut
+          Log Out
         </button>
       )}
+      </div>
     </div>
   );
 };

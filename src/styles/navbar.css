@@ -6,14 +6,25 @@ img {
 .navbar {
     display: flex;
     justify-content: space-between;
-    margin: 10px;
-    border: 1px solid black;
+    /* width: 100%; */
+    /* margin: 10px; */
+    padding: 10px;
+    box-shadow: 2px 1px 1px #d1cece;
+    /* border: 1px solid black; */
 }
 
-.navbar > ul > li {
+/* .navbar > ul > a > li {
     list-style-type: none;
-    padding-right: 20px;
+    padding: 0 20px;
     cursor: pointer;
+} */
+
+ a {
+    list-style-type: none;
+    padding: 0 20px;
+    cursor: pointer; 
+    font-weight: 700;
+    font-size: 18px;
 }
 
 ul {
@@ -21,5 +32,22 @@ ul {
 }
 
 button{
+    width: 70px;
     padding: 10px;
+    background-color: rgb(28, 16, 71);
+    color: #ffffff;
+    border: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+.auth{
+    /* width: 80px; */
+    display: flex;
+}
+
+ul > a > li {
+    color: #525050;
 }

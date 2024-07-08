@@ -5,17 +5,30 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Offer from './components/Offer.jsx'
 import Error from './components/Error.jsx'
+import Body from './components/Body.jsx'
+import Menu from './components/Menu.jsx'
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
-    errorElement: <Error/>
+    errorElement: <Error/>,
+    children: [
+      {
+        path: "/",
+        element: <Body/>
+      },
+      {
+        path: "/offer",
+        element: <Offer/>
+      },
+      {
+        path:"/restaurant/:id",
+        element: <Menu/>
+      }
+    ]
   },
-  {
-    path: "/offer",
-    element: <Offer/>
-  }
+  
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

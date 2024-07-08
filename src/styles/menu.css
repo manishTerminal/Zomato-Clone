@@ -1,0 +1,11 @@
+.parent {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    /* border: 1px solid black; */
+    
+}
+
+.menu{
+    padding-left: 20px;
+}

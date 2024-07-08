@@ -4,13 +4,13 @@ import Card from "./Card";
 import "../styles/body.css";
 import { API_URL } from "../constant";
 import ShimmerUi from "./ShimmerUi";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [restaurantList, setRestaurantList] = useState([]);
   const [filterRestaurantList, setFilterRestaurantList] = useState([]);
 
-  console.log(restaurantList)
   useEffect(() => {
     fetchRestaurant();
   }, []);
@@ -18,7 +18,6 @@ const Body = () => {
   const fetchRestaurant = async () => {
     const data = await fetch(API_URL);
     const res = await data.json();
-    console.log(res);
 
     setRestaurantList(
       res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -39,8 +38,10 @@ const Body = () => {
       return fildata;
     }
   };
-
-  return (restaurantList.length === 0) ? <ShimmerUi/> : (
+  console.log("restaurnat list after fetch ", restaurantList);
+  return restaurantList.length === 0 ? (
+    <ShimmerUi />
+  ) : (
     <>
       <div>
         <input
@@ -55,15 +56,23 @@ const Body = () => {
         <button
           onClick={() => {
             setRestaurantList(filterData(searchText, filterRestaurantList));
+
+            if (fildata.length === 0) {
+              return [];
+            }
           }}
         >
           Search
         </button>
       </div>
 
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop:"16px"}}>
         {restaurantList.map((list) => {
-          return <Card {...list.info} key={list.info.id} />;
+          return (
+            <Link key={list.info.id} to={"/restaurant/" + list.info.id}>
+              <Card {...list.info} />
+            </Link>
+          );
         })}
 
         {/* <Card

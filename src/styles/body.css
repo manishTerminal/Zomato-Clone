@@ -1,9 +1,10 @@
 .search-bar {
     padding: 10px;
     width: 500px;
-    margin: 0px 10px;
+    margin: 20px 10px 10px 40px;
 }
 
 button {
     padding: 10px;
 }
+
