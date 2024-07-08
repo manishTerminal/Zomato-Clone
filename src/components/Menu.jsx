@@ -23,18 +23,20 @@ const Menu = () => {
 
     setRestaurant(json?.data?.cards);
   };
-  if(!restaurant) return null;
-  console.log(restaurant)
-  return (restaurant.length === 0) ? (
+
+  if (!restaurant) return null;
+  console.log(restaurant);
+
+  return restaurant.length === 0 ? (
     <ShimmerUi />
   ) : (
     <>
       <div className="parent">
-        <div>
-          <h2>{restaurant[2]?.card?.card?.info?.name}</h2>
+        <div className="info">
+          <h2 style={{color:"#000"}}>{restaurant[2]?.card?.card?.info?.name}</h2>
           <h1>{restaurant[2]?.card?.card?.info?.avgRatingString}</h1>
           <h1>{restaurant[2]?.card?.card?.info?.costForTwoMessage}</h1>
-          <img
+          <img className="menu-primary-image"
             src={CDN_URL + restaurant[2]?.card?.card?.info?.cloudinaryImageId}
           />
         </div>
@@ -43,6 +45,16 @@ const Menu = () => {
           <h3>Menu</h3>
           <ol>
             {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards?.map(
+              (item) => (
+                <li key={item?.card?.info?.id}>{item?.card?.info?.name}</li>
+              )
+            )}
+            {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards?.map(
+              (item) => (
+                <li key={item?.card?.info?.id}>{item?.card?.info?.name}</li>
+              )
+            )}
+            {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card?.itemCards?.map(
               (item) => (
                 <li key={item?.card?.info?.id}>{item?.card?.info?.name}</li>
               )

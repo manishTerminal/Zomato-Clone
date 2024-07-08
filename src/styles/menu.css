@@ -9,3 +9,11 @@
 .menu{
     padding-left: 20px;
 }
+
+.parent .menu-primary-image{
+    width: 300px;
+}
+
+.parent .info{
+    margin-top: 16px;
+}
