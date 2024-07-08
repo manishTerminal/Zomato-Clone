@@ -1,4 +1,6 @@
-# React + Vite
+# Zomato clone App
+
+# Please install cors plugin in your chrome browser to see the restaurant list.
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
