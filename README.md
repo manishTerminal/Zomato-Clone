@@ -1,4 +1,4 @@
-# React + Vite
+# Zomato clone App
 
 # Please install cors plugin in your chrome browser to see the restaurant list.
 
