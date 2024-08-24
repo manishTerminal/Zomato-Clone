@@ -8,8 +8,8 @@ import { addItem } from "../utils/cartSlice";
 
 const Menu = () => {
   const { id } = useParams();
-  const [restaurant, setRestaurant] = useState(null);
-  const dispatch = useDispatch()
+  const [restaurant, setRestaurant] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchMenu();
@@ -33,51 +33,162 @@ const Menu = () => {
   return restaurant.length === 0 ? (
     <ShimmerUi />
   ) : (
-    <>
-      <div className="">
-        <div className="">
-          <h2 style={{ color: "#000" }}>
+    <div className="flex flex-col justify-center items-center  ">
+      <div className="pt-24 flex justify-center items-center w-3/4 shadow">
+        <div>
+          <h2 className="text-2xl font-bold" style={{ color: "#000" }}>
             {restaurant[2]?.card?.card?.info?.name}
           </h2>
           <h1>{restaurant[2]?.card?.card?.info?.avgRatingString}</h1>
           <h1>{restaurant[2]?.card?.card?.info?.costForTwoMessage}</h1>
-          <img
-            className="menu-primary-image"
-            src={CDN_URL + restaurant[2]?.card?.card?.info?.cloudinaryImageId}
-          />
         </div>
-
-        <div className="">
-          <h3>Menu</h3>
-          <ol className="flex m-4 flex-wrap">
-            {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards?.map(
-              (item) => (
-                <li className="m-4 border" key={item?.card?.info?.id}>
-                  {item?.card?.info?.name}{" "}
-                  <button className="bg-green-200 m-1" onClick={()=>dispatch(addItem(item))}>Add</button>
-                </li>
-              )
-            )}
-            {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards?.map(
-              (item) => (
-                <li className="m-4" key={item?.card?.info?.id}>
-                  {item?.card?.info?.name}{" "}
-                  <button className="bg-green-200 m-1" onClick={()=>dispatch(addItem(item))}>Add</button>
-                </li>
-              )
-            )}
-            {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card?.itemCards?.map(
-              (item) => (
-                <li className="m-4" key={item?.card?.info?.id}>
-                  {item?.card?.info?.name}{" "}
-                  <button className="bg-green-200 m-1" onClick={()=>dispatch(addItem(item))}>Add</button>
-                </li>
-              )
-            )}
-          </ol>
-        </div>
+        <img
+          className="w-32 rounded-md m-4"
+          src={CDN_URL + restaurant[2]?.card?.card?.info?.cloudinaryImageId}
+        />
       </div>
-    </>
+
+      <div className="flex flex-col justify-center items-center">
+        <h3 className="text-xl font-bold mt-4">Menu : </h3>
+        <ol className="flex  m-4 flex-wrap w-3/4 justify-center items-center">
+          {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards?.map(
+            (item) => (
+              <div
+                className="flex justify-between  p-2 shadow-md m-1 rounded-md w-1/3"
+                key={item?.card?.info?.id}
+              >
+                <div>
+                  <li className="">{item?.card?.info?.name} </li>
+                  <li>Rs. {item?.card?.info?.price / 100}</li>
+                  {/* <li>{item?.card?.info?.description}</li> */}
+                  <li>{item?.card?.info?.ratings.aggregatedRating.rating}</li>
+                  <button
+                    className="bg-green-200 m-1 px-4 py-2"
+                    onClick={() => dispatch(addItem(item))}
+                  >
+                    Add to cart
+                  </button>
+                </div>
+                <div className="w-28 h-28">
+                  <img
+                    className="object-fill"
+                    src={CDN_URL + item?.card?.info?.imageId}
+                  />
+                </div>
+              </div>
+            )
+          )}
+          {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards?.map(
+            (item) => (
+              <div
+                className="flex justify-between  p-2 shadow-md m-1 rounded-md w-1/3"
+                key={item?.card?.info?.id}
+              >
+                <div>
+                  <li className="">{item?.card?.info?.name} </li>
+                  <li>Rs. {item?.card?.info?.price / 100}</li>
+                  {/* <li>{item?.card?.info?.description}</li> */}
+                  <li>{item?.card?.info?.ratings.aggregatedRating.rating}</li>
+                  <button
+                    className="bg-green-200 m-1 px-4 py-2"
+                    onClick={() => dispatch(addItem(item))}
+                  >
+                    Add to cart
+                  </button>
+                </div>
+                <div className="w-28 h-28">
+                  <img
+                    className="object-fill"
+                    src={CDN_URL + item?.card?.info?.imageId}
+                  />
+                </div>
+              </div>
+            )
+          )}
+          {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards?.map(
+            (item) => (
+              <div
+                className="flex justify-between  p-2 shadow-md m-1 rounded-md w-1/3"
+                key={item?.card?.info?.id}
+              >
+                <div>
+                  <li className="">{item?.card?.info?.name} </li>
+                  <li>Rs. {item?.card?.info?.price / 100}</li>
+                  {/* <li>{item?.card?.info?.description}</li> */}
+                  <li>{item?.card?.info?.ratings.aggregatedRating.rating}</li>
+                  <button
+                    className="bg-green-200 m-1 px-4 py-2"
+                    onClick={() => dispatch(addItem(item))}
+                  >
+                    Add to cart
+                  </button>
+                </div>
+                <div className="w-28 h-28">
+                  <img
+                    className="object-fill"
+                    src={CDN_URL + item?.card?.info?.imageId}
+                  />
+                </div>
+              </div>
+            )
+          )}
+          {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card?.itemCards?.map(
+            (item) => (
+              <div
+                className="flex justify-between  p-2 shadow-md m-1 rounded-md w-1/3"
+                key={item?.card?.info?.id}
+              >
+                <div>
+                  <li className="">{item?.card?.info?.name} </li>
+                  <li>Rs. {item?.card?.info?.price / 100}</li>
+                  {/* <li>{item?.card?.info?.description}</li> */}
+                  <li>{item?.card?.info?.ratings.aggregatedRating.rating}</li>
+                  <button
+                    className="bg-green-200 m-1 px-4 py-2"
+                    onClick={() => dispatch(addItem(item))}
+                  >
+                    Add to cart
+                  </button>
+                </div>
+                <div className="w-28 h-28">
+                  <img
+                    className="object-fill"
+                    src={CDN_URL + item?.card?.info?.imageId}
+                  />
+                </div>
+              </div>
+            )
+          )}
+          {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card?.card?.itemCards?.map(
+            (item) => (
+              <div
+                className="flex justify-between  p-2 shadow-md m-1 rounded-md w-1/3"
+                key={item?.card?.info?.id}
+              >
+                <div>
+                  <li className="">{item?.card?.info?.name} </li>
+                  <li>Rs. {item?.card?.info?.price / 100}</li>
+                  {/* <li>{item?.card?.info?.description}</li> */}
+                  <li>{item?.card?.info?.ratings.aggregatedRating.rating}</li>
+                  <button
+                    className="bg-green-200 m-1 px-4 py-2"
+                    onClick={() => dispatch(addItem(item))}
+                  >
+                    Add to cart
+                  </button>
+                </div>
+                <div className="w-28 h-28">
+                  <img
+                    className="object-fill"
+                    src={CDN_URL + item?.card?.info?.imageId}
+                  />
+                </div>
+              </div>
+            )
+          )}
+        </ol>
+      </div>
+    </div>
   );
 };
 

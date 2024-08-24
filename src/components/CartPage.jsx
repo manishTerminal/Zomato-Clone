@@ -15,7 +15,7 @@ const CartPage = () => {
   };
 
   return (
-    <div>
+    <div className="pt-8">
       <h2 className="text-black font-bold text-3xl">Items in your cart :</h2>
       <button
         className="bg-red-100 p-2 m-4 shadow hover:bg-slate-500"
