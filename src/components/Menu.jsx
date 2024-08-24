@@ -34,8 +34,8 @@ const Menu = () => {
     <ShimmerUi />
   ) : (
     <>
-      <div className="parent">
-        <div className="info">
+      <div className="">
+        <div className="">
           <h2 style={{ color: "#000" }}>
             {restaurant[2]?.card?.card?.info?.name}
           </h2>
@@ -47,7 +47,7 @@ const Menu = () => {
           />
         </div>
 
-        <div className="menu">
+        <div className="">
           <h3>Menu</h3>
           <ol className="flex m-4 flex-wrap">
             {restaurant[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards?.map(

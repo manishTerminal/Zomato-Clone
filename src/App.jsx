@@ -10,13 +10,13 @@ import store from "./utils/Store";
 
 function App() {
   return (
-    <>
+    <div className="relative">
       <Provider store={store}>
         <Navbar />
         <Outlet />
         <Footer />
       </Provider>
-    </>
+    </div>
   );
 }
 

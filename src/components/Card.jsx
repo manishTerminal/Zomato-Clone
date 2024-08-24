@@ -6,7 +6,7 @@ import { CDN_URL } from "../constant";
 const Card = ({ cloudinaryImageId, name, avgRating, areaName }) => {
 
   return (
-    <div className="card">
+    <div className="m-4 shadow-md">
     <div className="image">
       <img
         src={
@@ -15,10 +15,10 @@ const Card = ({ cloudinaryImageId, name, avgRating, areaName }) => {
         }
       />
       </div>
-      <div className="info">
-      <h2 style={{color:"black"}}>{name}</h2>
-      <h3>{avgRating}</h3>
-      <h3>{areaName}</h3>
+      <div className="info p-2">
+      <h2 className="font-medium" style={{color:"black"}}>{name}</h2>
+      <h3 className="text-gray-600 font-medium">{avgRating}</h3>
+      <h3 className="text-gray-600 font-medium">{areaName}</h3>
       </div>
     </div>
   );

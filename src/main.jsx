@@ -36,14 +36,12 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <CartPage/>
-      }
+        element: <CartPage />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={appRouter} />
-  </React.StrictMode>
+  <RouterProvider router={appRouter} />
 );

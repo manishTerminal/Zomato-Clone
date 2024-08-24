@@ -15,16 +15,90 @@ const Body = () => {
     fetchRestaurant();
   }, []);
 
-  const fetchRestaurant = async () => {
-    const data = await fetch(API_URL);
-    const res = await data.json();
+  // console.log(restaurantList)
 
-    setRestaurantList(
-      res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilterRestaurantList(
-      res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+  // const fetchRestaurant = async () => {
+  //   const data = await fetch(API_URL);
+  //   const res = await data.json();
+  //   console.log(res);
+
+  //   setRestaurantList(
+  //     res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  //   );
+  //   setFilterRestaurantList(
+  //     res?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+  //   );
+
+  //   console.log(restaurantList);
+  //   console.log(filterRestaurantList);
+  // };
+
+  // const fetchRestaurant = async () => {
+  //   try {
+  //     const data = await fetch(API_URL);
+  //     const res = await data.json();
+  //     console.log(res);
+
+  //     const restaurants = res?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+
+  //     setRestaurantList(restaurants);
+  //     setFilterRestaurantList(restaurants);
+
+  //     console.log(restaurants);
+  //   } catch (error) {
+  //     console.error("Failed to fetch restaurants:", error);
+  //     setRestaurantList([]);
+  //     setFilterRestaurantList([]);
+  //   }
+  // };
+
+  const fetchRestaurant = async () => {
+    try {
+      const response = await fetch(API_URL);
+
+      if (!response.ok) {
+        console.error(
+          "Failed to fetch: ",
+          response.status,
+          response.statusText
+        );
+        setRestaurantList([]);
+        setFilterRestaurantList([]);
+        return;
+      }
+
+      const res = await response.json();
+
+      // Log the specific path to debug the structure
+      console.log("API Response:", res);
+      console.log("Cards:", res?.data?.cards);
+
+      // Adjust this based on the actual structure of your API response
+      const cards = res?.data?.cards || [];
+
+      // Explore other indices if [4] doesn't contain the expected data
+      let restaurants = [];
+      if (cards.length > 0) {
+        for (let i = 0; i < cards.length; i++) {
+          const gridElements =
+            cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+          console.log("the card : ", i);
+          if (gridElements) {
+            restaurants = gridElements;
+            break; // Exit loop once restaurants are found
+          }
+        }
+      }
+
+      setRestaurantList(restaurants);
+      setFilterRestaurantList(restaurants);
+
+      console.log("Restaurants:", restaurants);
+    } catch (error) {
+      console.error("Error during fetch:", error);
+      setRestaurantList([]);
+      setFilterRestaurantList([]);
+    }
   };
 
   const filterData = (searchText, filterRestaurantList) => {
@@ -38,15 +112,15 @@ const Body = () => {
       return fildata;
     }
   };
-  console.log("restaurnat list after fetch ", restaurantList);
+
   return restaurantList.length === 0 ? (
     <ShimmerUi />
   ) : (
-    <>
-      <div>
+    <div className="flex flex-col justify-center items-center">
+      <div className="">
         <input
           type="text"
-          className="search-bar"
+          className="search-bar mt-24 border"
           placeholder="Search the restaurant..."
           onChange={(e) => {
             setSearchText(e.target.value);
@@ -54,6 +128,7 @@ const Body = () => {
         />
 
         <button
+          className="mx-2 bg-red-600 text-white px-4 py-2"
           onClick={() => {
             setRestaurantList(filterData(searchText, filterRestaurantList));
 
@@ -66,7 +141,7 @@ const Body = () => {
         </button>
       </div>
 
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop:"16px"}}>
+      <div className="flex flex-wrap mt-4 justify-center items-center">
         {restaurantList.map((list) => {
           return (
             <Link key={list.info.id} to={"/restaurant/" + list.info.id}>
@@ -128,7 +203,7 @@ const Body = () => {
         areaName={data[4].info.areaName}
       /> */}
       </div>
-    </>
+    </div>
   );
 };
 
