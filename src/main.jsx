@@ -9,6 +9,7 @@ import Body from "./components/Body.jsx";
 import Menu from "./components/Menu.jsx";
 import Month from "./components/Month.jsx";
 import CartPage from "./components/CartPage.jsx";
+import Checkout from "./components/Checkout.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const appRouter = createBrowserRouter([
         path: "/cart",
         element: <CartPage />,
       },
+      {
+        path: "/checkout",
+        element: <Checkout />,
+      }
     ],
   },
 ]);

@@ -3,6 +3,7 @@ import zetomart from "../assets/zetomart-logo.png";
 import "../styles/navbar.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import cart from "../assets/cart.png"
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,7 +30,7 @@ const Navbar = () => {
             <li className="mx-2">Help</li>
           </Link> */}
           <Link to="/cart">
-            <li className="mx-2">Cart - {items.length} items</li>
+            <li className="mx-2 flex text-red-600"><img className="w-7" src={cart}/> {items.length} item</li>
           </Link>
         </ul>
 
